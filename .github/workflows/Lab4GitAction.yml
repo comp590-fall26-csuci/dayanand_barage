@@ -24,4 +24,4 @@ jobs:
 
     - name: Clean build artifacts
       working-directory: Lab4/590MakefileLab
-      run: clean
+      run: make clean
