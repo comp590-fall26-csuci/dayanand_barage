@@ -9,14 +9,14 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Lab4/590MakefileLab
 
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
 
+    - name: Working Directory
+      run: Lab4/590MakefileLab
+      
     - name: Compile program
       run: make main
 
