@@ -16,9 +16,7 @@ jobs:
 
     - name: Compile program
       working-directory: Lab4/590MakefileLab
-      run: |
-            make clean
-            make
+      run: make
 
     - name: Run executable and test
       working-directory: Lab4/590MakefileLab
@@ -26,4 +24,4 @@ jobs:
 
     - name: Clean build artifacts
       working-directory: Lab4/590MakefileLab
-      run: make clean
+      run: clean
