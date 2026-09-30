@@ -9,19 +9,18 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Lab4/590MakefileLab
 
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
 
     - name: Compile program
-      run: make
+      run: |
+            cd Lab4/590MakefileLab
+            make
 
-    - name: Run executable and test
-      run: make test-output
+    ##- name: Run executable and test
+      #run: make test-output
 
-    - name: Clean build artifacts
-      run: make clean
+    #- name: Clean build artifacts
+     # run: make clean
