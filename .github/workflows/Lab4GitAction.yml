@@ -9,9 +9,6 @@ on:
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Lab4/590MakefileLab
 
     steps:
     - name: Check out repository
