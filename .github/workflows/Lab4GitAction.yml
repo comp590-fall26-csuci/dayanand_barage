@@ -19,8 +19,8 @@ jobs:
             cd Lab4/590MakefileLab
             make
 
-    ##- name: Run executable and test
-      #run: make test-output
+    - name: Run executable and test
+      run: make test-output
 
-    #- name: Clean build artifacts
-     # run: make clean
+    - name: Clean build artifacts
+      run: make clean
