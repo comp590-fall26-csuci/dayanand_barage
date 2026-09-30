@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Compile program
-      run: make
+      run: make main
 
     - name: Run executable and test
       run: make test-output
