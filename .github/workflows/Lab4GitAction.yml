@@ -15,12 +15,15 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Compile program
+      working-directory: Lab4/590MakefileLab
       run: |
-            cd Lab4/590MakefileLab
+            make clean
             make
 
     - name: Run executable and test
+      working-directory: Lab4/590MakefileLab
       run: make test-output
 
     - name: Clean build artifacts
+      working-directory: Lab4/590MakefileLab
       run: make clean
