@@ -22,6 +22,10 @@ jobs:
       working-directory: Lab4/590MakefileLab
       run: make test-output
 
+    - name: Run executable and test for all the sequences
+      working-directory: Lab4/590MakefileLab
+      run: make test
+
     - name: Clean build artifacts
       working-directory: Lab4/590MakefileLab
       run: make clean
