@@ -27,4 +27,4 @@ jobs:
           AFL_NO_UI: "1"
           AFL_SKIP_CPUFREQ: "1"
       run: |
-          afl-fuzz -V 180 -i ./seeds -o fuzz-out -S ci -- ./dvcp @@
+          afl-fuzz -V 180 -i seeds -o fuzz-out -S ci -- ./dvcp @@
