@@ -1,0 +1,30 @@
+name: afl++ Fuzzing
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  fuzz:
+
+    runs-on: ubuntu-latest
+    container: aflplusplus/aflplusplus:latest
+    timeout-minutes: 8
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build dvcp
+      working-directory: Lab5
+      run: make dvcp
+      
+    - name: Run AFL++
+      working-directory: Lab5
+      shell: bash
+      env:
+          AFL_NO_UI: "1"
+          AFL_SKIP_CPUFREQ: "1"
+      run: |
+          afl-fuzz -V 180 -i fuzz/seeds -o fuzz-out -S ci -- ./dvcp @@
