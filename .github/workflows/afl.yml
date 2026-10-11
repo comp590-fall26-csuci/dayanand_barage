@@ -16,9 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Build fuzz
+    - name: Build dvcp
       working-directory: Lab5
-      run: make fuzz
+      run: make dvcp
       
     - name: Run AFL++
       working-directory: Lab5
