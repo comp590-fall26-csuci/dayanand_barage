@@ -1,0 +1,27 @@
+- name: Lab 6 Playbook
+  hosts: test
+  become: true
+
+  tasks:
+    - name: Install asciinema
+      apt:
+        name: asciinema
+        state: present
+        update_cache: yes
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+    - name: Start and Enable apache service 
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Debug Message 
+      debug:
+        msg: "Hostname for {{ inventory_hostname }} is {{ ansible_hostname }}"
+      when: ansible_hostname is defined
