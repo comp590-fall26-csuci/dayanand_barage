@@ -18,8 +18,15 @@ test-output: main
 	@echo "Output tests passed!"
 	@rm -f output.txt
 
+test: test_main.o fibonacci.o
+	cc test_main.o fibonacci.o -o test_runner
+	./test_runner
+
+test_main.o: test_main.c
+	cc -Iheaders -c test_main.c -o test_main.o
+
 clean:
-	rm *.o
+	rm *.o main test_runner
 
 run: main
 	./main
