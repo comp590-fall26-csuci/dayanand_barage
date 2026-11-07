@@ -1,0 +1,70 @@
+https://dl.gitea.com/gitea/28.3.0/gitea-28.3.0-linux-arm64
+
+sudo mkdir -p /var/lib/gitea/{custom,data,log}
+sudo chown -R git:git /var/lib/gitea/
+sudo chmod -R 750 /var/lib/gitea/
+sudo mkdir /etc/gitea
+sudo chown root:git /etc/gitea
+sudo chmod 770 /etc/gitea
+
+sudo chmod 750 /etc/gitea
+sudo chmod 640 /etc/gitea/app.ini
+
+vi app.ini
+APP_NAME = Gitea
+RUN_USER = git
+RUN_MODE = prod
+WORK_PATH = /var/lib/gitea
+
+[repository]
+ROOT = /var/lib/gitea/gitea-repositories
+
+[database]
+DB_TYPE  = sqlite3
+PATH     = /var/lib/gitea/data/gitea.db
+SSL_MODE = disable
+
+[server]
+SSH_DOMAIN       = localhost
+HTTP_PORT        = 3000
+ROOT_URL         = c
+DISABLE_SSH      = false
+SSH_PORT         = 22
+LFS_START_SERVER = true
+
+[actions]
+ENABLED = true
+
+[security]
+INSTALL_LOCK = true
+SECRET_KEY   = gitea_secret_key_change_me_123456789
+
+
+sudo chown -R git:git /etc/gitea /var/lib/gitea
+sudo chmod 600 /etc/gitea/app.ini
+
+sudo -u git /usr/local/bin/gitea admin user create \
+  --config /etc/gitea/app.ini \
+  --username admin \
+  --password DayaDebian \
+  --email dayanand.barage934@myci.csuci.edu \
+  --admin
+  
+sudo systemctl restart gitea
+
+ssudo -u git /usr/local/bin/gitea --config /etc/gitea/app.ini actions generate-runner-token
+
+sudo ./gitea-runner register --instance "http://127.0.0.1:3000" --token "GMi0VBcl5rgIBQlFdZRf5X9tOJnpwDgrFMAvQnFX" --no-interactive
+
+sudo gitea-runner config init --config /etc/gitea-runner/config.yaml
+sudo mkdir -p /etc/gitea-runner
+sudo ./gitea-runner config init --config /etc/gitea-runner/config.yaml
+sudo chown gitea-runner /etc/gitea-runner/config.yaml
+
+sudo chmod 755 /var/lib/gitea-runner/
+cd /var/lib/gitea-runner
+
+sudo -u gitea-runner gitea-runner register --config /etc/gitea-runner/config.yaml --worked after fixing /etc/gitea-runner/config.yaml
+--mv .runner from /usr/loca/bin to /var/lib/gitea-runner
+-- write file /etc/systemd/system/gitea-runner.service
+sudo systemctl daemon-reload
