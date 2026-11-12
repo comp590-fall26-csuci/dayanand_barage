@@ -1,0 +1,18 @@
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    make \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+    
+WORKDIR /root/Lab8
+
+COPY Lab4/590MakefileLab ./
+
+RUN make clean
+
+RUN make run
+
+RUN make test-output
+
+ENTRYPOINT ["make", "test"]
